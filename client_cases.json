@@ -1,0 +1,79 @@
+{
+  "fx": {
+    "eurusd_spot": 1.1,
+    "eurusd_forward": 1.1110551837925848,
+    "put_premium_eur": 201070.60160615976,
+    "put_premium_pct": 2.2117766176677573,
+    "put_strike_eurusd": 1.1110551837925848,
+    "collar_worst_eurusd": 1.1454177152500877,
+    "collar_best_eurusd": 1.076536387072218,
+    "collar_floor_eur": 8730439.443060845,
+    "collar_cap_eur": 9289049.696867483,
+    "scenarios": {
+      "1.00": {
+        "Unhedged": 10000000.0,
+        "Forward": 9000453.034083346,
+        "Buy USD put": 9796908.605251985,
+        "Zero-cost collar": 9289049.696867483
+      },
+      "1.05": {
+        "Unhedged": 9523809.523809522,
+        "Forward": 9000453.034083346,
+        "Buy USD put": 9320718.129061507,
+        "Zero-cost collar": 9289049.696867483
+      },
+      "1.10": {
+        "Unhedged": 9090909.09090909,
+        "Forward": 9000453.034083346,
+        "Buy USD put": 8887817.696161075,
+        "Zero-cost collar": 9090909.09090909
+      },
+      "1.15": {
+        "Unhedged": 8695652.173913045,
+        "Forward": 9000453.034083346,
+        "Buy USD put": 8797361.639335329,
+        "Zero-cost collar": 8730439.443060845
+      },
+      "1.20": {
+        "Unhedged": 8333333.333333334,
+        "Forward": 9000453.034083346,
+        "Buy USD put": 8797361.639335329,
+        "Zero-cost collar": 8730439.443060845
+      },
+      "1.25": {
+        "Unhedged": 8000000.0,
+        "Forward": 9000453.034083346,
+        "Buy USD put": 8797361.639335329,
+        "Zero-cost collar": 8730439.443060845
+      }
+    }
+  },
+  "cpn": {
+    "plain": {
+      "zero_coupon": 0.8824969025845953,
+      "fees": 0.01,
+      "option_budget": 0.10750309741540466,
+      "option_price": 0.128385240431043,
+      "participation": 0.8373477905596607
+    },
+    "capped_50": {
+      "zero_coupon": 0.8824969025845953,
+      "fees": 0.01,
+      "option_budget": 0.10750309741540466,
+      "option_price": 0.09749127447789838,
+      "participation": 1.1026945538574942
+    }
+  },
+  "rc": {
+    "strike_100": {
+      "put_premium": 0.11415459920894222,
+      "coupon": 0.13210640596551904,
+      "strike_pct": 1.0
+    },
+    "strike_90": {
+      "put_premium": 0.0743392447759332,
+      "coupon": 0.09128312103631554,
+      "strike_pct": 0.9
+    }
+  }
+}

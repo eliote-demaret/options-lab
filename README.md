@@ -1,25 +1,28 @@
 # Options Lab — pricing, Greeks & hedging from scratch
 
 A small Python library and set of experiments that implement the core of derivatives pricing
-(Hull, *Options, Futures and Other Derivatives*) and test **when the theory works in practice**.
+(Hull, *Options, Futures and Other Derivatives*) and test **when the theory works in practice**. It then uses the same tools the way a
+sales desk would: to **structure and pitch hedging and investment solutions to clients**.
 
 <p align="center">
   <img src="figures/2_hedging_error.png" width="85%">
 </p>
 <p align="center">
-  <img src="figures/3_vol_pnl.png" width="48%">
-  <img src="figures/5_skew.png" width="48%">
+  <img src="figures/6_fx_hedging.png" width="48%">
+  <img src="figures/8_reverse_convertible.png" width="48%">
 </p>
 
-📄 **Full write-up:** [Options_Lab_Report.pdf](Options_Lab_Report.pdf)
+📄 **Write-ups:** [Pricing & hedging report](Options_Lab_Report.pdf) · [Client solutions (FX hedging, capital-protected note, reverse convertible)](Client_Solutions.pdf)
 
 | Module | What it does |
 |---|---|
 | `optlab/pricing.py` | Black-Scholes-Merton (with dividend yield), analytical Greeks, CRR binomial tree (European & American), Monte Carlo with antithetic variates, implied volatility (Newton-Raphson + bisection fallback) |
 | `optlab/hedging.py` | GBM path simulation, discrete delta-hedging of a short call, minimum-variance futures hedge ratio, beta hedging with index futures |
+| `optlab/solutions.py` | Client solutions: FX forward / option / zero-cost collar for an exporter, capital-protected note (participation, cap), reverse convertible (enhanced coupon) |
 | `optlab/jumps.py` | Merton jump-diffusion pricer, used to generate an implied-volatility skew |
-| `tests/` | 11 unit tests: Hull reference values, put-call parity, no-arbitrage bounds, tree→BS convergence, American vs European, MC error, IV round-trip, Greeks vs finite differences, hedging error |
-| `scripts/run_experiments.py` | Reproduces every figure in `figures/` and every number in `results.json` |
+| `tests/` | 18 unit tests: Hull reference values, put-call parity, no-arbitrage bounds, tree→BS convergence, American vs European, MC error, IV round-trip, Greeks vs finite differences, hedging error, FX parity, zero-cost collar, product budget identities |
+| `scripts/run_experiments.py` | Reproduces figures 1-5 and `results.json` |
+| `scripts/client_cases.py` | Reproduces the client case studies (figures 6-8, `client_cases.json`) |
 
 ## Key findings
 
@@ -37,12 +40,25 @@ A small Python library and set of experiments that implement the core of derivat
 5. **Why there is a skew.** Prices from a jump-diffusion with negative jumps, inverted through
    Black-Scholes, give an implied vol of 22.5% at K = 70 vs 17.4% ATM: the equity skew comes from crash risk.
 
+## Client solutions (sales perspective)
+
+*Illustrative market parameters, not live quotes.*
+
+6. **Exporter receiving USD 10m in 6 months.** Forward at 1.1111 locks EUR 9.00m for free. An ATM-forward
+   USD put costs EUR 0.20m (2.2%) but keeps the upside. A **zero-cost collar** guarantees EUR 8.73m–9.29m
+   (EUR/USD 1.1454 / 1.0765) with no premium. Includes a "which solution for which client" matrix and a 3-sentence pitch.
+7. **5-year capital-protected note on Euro Stoxx 50.** Zero-coupon 88.2% + 1% fees leaves a 10.8% option budget,
+   giving **84% participation**, or 110% with a 50% cap. Shows how rates, vol and dividends drive participation.
+8. **1-year reverse convertible (bond + short put).** Coupon of **13.2%** with a 100% strike or 9.1% with a 90% strike:
+   the investor earns the volatility premium and is short vol.
+
 ## Run it
 
 ```bash
 pip install numpy scipy matplotlib pytest
-pytest -q                          # 11 tests
-python scripts/run_experiments.py  # figures + results.json (~20 s)
+pytest -q                          # 18 tests
+python scripts/run_experiments.py  # figures 1-5 + results.json (~20 s)
+python scripts/client_cases.py     # figures 6-8 + client_cases.json
 ```
 
 ## Limitations / next steps
