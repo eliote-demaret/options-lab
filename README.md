@@ -3,6 +3,16 @@
 A small Python library and set of experiments that implement the core of derivatives pricing
 (Hull, *Options, Futures and Other Derivatives*) and test **when the theory works in practice**.
 
+<p align="center">
+  <img src="figures/2_hedging_error.png" width="85%">
+</p>
+<p align="center">
+  <img src="figures/3_vol_pnl.png" width="48%">
+  <img src="figures/5_skew.png" width="48%">
+</p>
+
+📄 **Full write-up:** [Options_Lab_Report.pdf](Options_Lab_Report.pdf)
+
 | Module | What it does |
 |---|---|
 | `optlab/pricing.py` | Black-Scholes-Merton (with dividend yield), analytical Greeks, CRR binomial tree (European & American), Monte Carlo with antithetic variates, implied volatility (Newton-Raphson + bisection fallback) |
